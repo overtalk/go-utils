@@ -1,3 +1,5 @@
+//  usage of pprof
+
 package pprof_test
 
 import (
