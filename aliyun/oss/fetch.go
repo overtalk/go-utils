@@ -1,7 +1,6 @@
 package oss
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 
@@ -39,7 +38,7 @@ func AliyunOSS(accessKey, secretKey, endpoint, bucket, dir string) *aliyunOSS {
 	}
 }
 
-func (a *aliyunOSS) FetchJSON(fileName string) ([]byte, error) {
+func (a *aliyunOSS) Fetch(fileName string) ([]byte, error) {
 	client, err := oss.New(a.endpoint, a.accessKey, a.secretKey)
 	if err != nil {
 		return nil, err
@@ -64,10 +63,6 @@ func (a *aliyunOSS) FetchJSON(fileName string) ([]byte, error) {
 	if len(data) == 0 {
 		//logger.GetLogger().Errorf("file %s is empty", a.dir+fileName)
 		return nil, fmt.Errorf("file %s is empty", a.dir+fileName)
-	}
-
-	if !json.Valid(data) {
-		return nil, fmt.Errorf("file %s is not json", a.dir+fileName)
 	}
 
 	return data, nil

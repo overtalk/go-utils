@@ -1,10 +1,8 @@
-# This is a TOML document.
-
 title = "TOML Example"
 
 [owner]
-name = "Tom Preston-Werner"
-dob = 1979-05-27T07:32:00-08:00 # First class dates
+name = "Lance Uppercut"
+dob = 1979-05-27T07:32:00-08:00 # 日期是一等公民
 
 [database]
 server = "192.168.1.1"
@@ -13,8 +11,7 @@ connection_max = 5000
 enabled = true
 
 [servers]
-
-  # Indentation (tabs and/or spaces) is allowed but not required
+  #你可以使用空格、制表符进行缩进，或者根本不缩进。TOML不关心缩进。
   [servers.alpha]
   ip = "10.0.0.1"
   dc = "eqdc10"
@@ -26,7 +23,7 @@ enabled = true
 [clients]
 data = [ ["gamma", "delta"], [1, 2] ]
 
-# Line breaks are OK when inside arrays
+# 数组内可以混入换行符
 hosts = [
   "alpha",
   "omega"

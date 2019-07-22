@@ -3,8 +3,6 @@ package config
 // 推荐使用toml文件作为配置文件
 import (
 	"os"
-
-	"github.com/BurntSushi/toml"
 )
 
 var (
@@ -12,20 +10,22 @@ var (
 	Conf     = &config{}
 )
 
+// Interpreter gets config form source
+type Interpreter interface {
+	Local(path string) error
+	Remote() error
+}
+
+// Source is the config source
+type Source interface {
+	Fetch(file string) ([]byte, error)
+}
+
 // Init get the config
-func Init() error {
+func Init(i Interpreter) error {
 	path, isExist := os.LookupEnv(confPath)
 	if isExist {
-		return local(path)
+		return i.Local(path)
 	}
-	return remote()
-}
-
-func local(path string) error {
-	return nil
-}
-
-func remote() error {
-	_, err := toml.Decode("", Conf)
-	return err
+	return i.Remote()
 }
