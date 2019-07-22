@@ -22,7 +22,7 @@ type Source interface {
 }
 
 // Init get the config
-func Init(i Interpreter) error {
+func Init(i Interpreter, s Source) error {
 	path, isExist := os.LookupEnv(confPath)
 	if isExist {
 		return i.Local(path)
